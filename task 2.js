@@ -1,0 +1,20 @@
+
+
+const XMLHttpRequest =  require('xhr2');
+let xhr = new XMLHttpRequest();
+
+xhr.open('Get', 'https://restcountries.com/v3.1/all');
+
+xhr.responseType = 'json';
+
+xhr.send();
+
+xhr.onload = function () {
+    const countries = xhr.response;
+    console.log(countries.filter(country => {
+        if (country.region == 'Asia') {
+            return true;
+        }
+    }).map(country => country.name.common));
+
+}
