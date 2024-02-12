@@ -1,82 +1,51 @@
-var rest_api = "https://restcountries.com/v3.1/all";
+var select = document.getElementById('country');
 
-async function api() {
-  var url = fetch(rest_api);
-  var out = await (await url).json();
-  // console.log(out[0]);
-  var parent = document.querySelector(".row");
-  for (let i of out) {
-    try {
-      // console.log(i);
-      var data_cont = document.createElement("div");
-      data_cont.classList.add("card");
+var promise = new Promise(function(resolve, reject) {
+    var details;
+    var request = new XMLHttpRequest();
+    var url = "https://restcountries.eu/rest/v2/all"
+    request.open('GET', url, true);
+    request.send();
+    request.onload = function() {
+        details = JSON.parse(this.response);
+        if (this.readyState === 4 && this.status === 200) {
+            resolve(details);
+        } else {
+            reject("Something Wrong with API");
+        }
 
-      //latlng
-      var lat = i.latlng[0];
-      var lng = i.latlng[1];
-      data_cont.setAttribute("lat", lat);
-      data_cont.setAttribute("lng", lng);
-
-      //Name
-      var country_name = document.createElement("h3");
-      country_name.innerText = i.name.common;
-      data_cont.append(country_name);
-
-      //Flag
-      var country_flag = document.createElement("img");
-      country_flag.setAttribute("src", i.flags.png);
-      data_cont.append(country_flag);
-
-      //Capital
-      var country_capital = document.createElement("p");
-      country_capital.innerText = "Capital : " + i.capital[0];
-      data_cont.append(country_capital);
-      // console.log(i.capital[0]);
-
-      //Region
-      var country_region = document.createElement("p");
-      country_region.innerText = "Region : " + i.region;
-      data_cont.append(country_region);
-
-      //Country codes
-      var country_code = document.createElement("p");
-      country_code.innerText = "Contry Code : " + i.cca3;
-      data_cont.append(country_code);
-
-      //Click Button
-      var click_btn = document.createElement("button");
-      click_btn.setAttribute("onclick", "clicking(this)");
-      click_btn.innerHTML = "Click for Weather";
-      data_cont.append(click_btn);
-      // console.log(click_btn);
-
-      parent.append(data_cont);
-    } catch (err) {
-      // console.log(err);
     }
-  }
-}
-api();
+})
 
-async function clicking(e) {
-  var parent = e.parentElement;
-  // console.log(e.parentElement);
-  var lat = parent.getAttribute("lat");
-  var lon = parent.getAttribute("lng");
-  var api_key = "02c0a4cb6d534fb8ec504bd1d2f69fe2";
-  var weather_api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}`;
-  var weather_url = fetch(weather_api);
-  var out1 = await (await weather_url).json();
-  // console.log(out1);
-  var result = document.querySelector("body div.container");
-  result.innerHTML = "";
-  var data_ele = document.createElement("h1");
-  data_ele.classList.add("cName");
-  var data_ele1 = document.createElement("p");
-  data_ele.classList.add("cWeather");
-  // console.log(data_ele.innerText);
-  data_ele.innerText = JSON.stringify(out1.sys.country);
-  data_ele1.innerText = JSON.stringify(out1.weather);
-  result.append(data_ele);
-  result.append(data_ele1);
+
+promise.then(function(data) {
+        for (let i = 0; i < data.length; i++) {
+            var opt = document.createElement('option');
+            opt.text = data[i].name;
+            opt.value = data[i].name;
+            select.add(opt);
+        }
+        select.onchange = function() {
+            getDetails(data);
+        }
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+
+
+
+function getDetails(data) {
+    var selectedOption = select.options[select.selectedIndex].text;
+    for (let i = 0; i < data.length; i++) {
+        if (selectedOption === data[i].name) {
+            document.getElementById('flag').src = data[i].flag;
+            document.getElementById('capital').innerHTML = data[i].capital;
+            document.getElementById('region').innerHTML = data[i].region;
+            document.getElementById('latlng').innerHTML = `Latitude : ${data[i].latlng[0].toFixed(2)} Longitude : ${data[i].latlng[1].toFixed(2)}`;
+            document.getElementById('code').innerHTML = `Code : ${data[i].currencies[0].code}`;
+            document.getElementById('name').innerHTML = `Name : ${data[i].currencies[0].name}`;
+            document.getElementById('symbol').innerHTML = `Symbol : ${data[i].currencies[0].symbol}`;
+        }
+    }
 }
