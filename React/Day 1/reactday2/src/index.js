@@ -8,6 +8,5 @@ var person = {
 // let age = person.age;
 // let location = person.location;
 
-var {name, age, location} = person
 
 console.log(`${name}, ${age}, ${location} `);
