@@ -4,7 +4,7 @@
 	},
 	"user-id": 1,
 	"name": "Arthu",
-	"present": true
+	"present": true"
   },
 
   {
@@ -15,12 +15,3 @@
 	"name": "Nandhu",
 	"present": true
   },
-
-  {
-	"_id": {
-	  "$oid": "65d642d885fe7656e150907a"
-	},
-	"user-id": 3,
-	"name": "Kutti",
-	"present": true
-  }]

@@ -4,7 +4,7 @@
 	},
 	"user-id": 1,
 	"name": "Arthu",
-	"present": true
+	"present": true"
   },
 
   {
@@ -23,4 +23,4 @@
 	"user-id": 3,
 	"name": "Kutti",
 	"present": true
-  }]
+  }

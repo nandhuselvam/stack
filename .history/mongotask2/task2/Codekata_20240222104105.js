@@ -10,11 +10,5 @@
 		"product_id": "B456",
 		"order_date": "2024-02-11",
 		"quality": 3
-	  },
-	  {
-		"_id": 1,
-		"product_id": "C789",
-		"order_date": "2024-02-12",
-		"quality": 4
 	  }
 ]
