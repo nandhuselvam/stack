@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
 const studentController = require("./controllers/studentController");
-const mentorController = require("./controllers/mentorController");
+const mentorController = require("./controllers/mentorController")
 
 const app = express();
 
