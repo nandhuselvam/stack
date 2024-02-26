@@ -1,0 +1,35 @@
+// Table pets as as{
+// 	PetID ABCD [pk]
+// 	Name Arthanari
+// 	Kind Human
+// 	Gender Male
+// 	Age varchar(23)
+// 	OwnerId int [ref:> B.OwnerId]
+// 	}
+  
+//   Table owners as B {
+// 	OwnerId int [pk]
+// 	Name Kutti
+// 	Surename Panneer
+// 	StreetAddress Tiruchengode(2)
+// 	State Tamilnadu
+// 	District Namakkal
+// 	ProcedureType Atype [ref:> C.ProcedureType]
+//   }
+  
+//   Table ProcedureDetails as C {
+// 	ProcedureType Atype
+// 	ProcedureCode Btype [pk]
+// 	Description Deeps
+// 	Price inet6
+// 	PetId PQRS [ref:> D.PetId]
+//    }
+  
+//    Table ProcedureHistory as D {
+// 	PetId PQRS
+// 	Procduretype Btype
+// 	ProcedureCode A211
+  
+//    }
+  
+  
