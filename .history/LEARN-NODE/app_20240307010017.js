@@ -1,0 +1,9 @@
+const getUserName = () => {
+	let name = null;
+	setTimeout(() => {
+		name = "Arthanari Panneerselvam";
+		console.log(name);
+	}, 2000);
+};
+
+
