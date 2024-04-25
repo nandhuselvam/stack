@@ -1,0 +1,18 @@
+import { Box, Button, Create  } from "@mui/material";
+
+
+
+
+
+const SideBarContent = () => {
+	return (
+		<Box>
+			<Box>
+				<Button> Compose </Button>
+			</Box>
+			<Box></Box>
+		</Box>
+	)
+}
+
+export default SideBarContent; 
